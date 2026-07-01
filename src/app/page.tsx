@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import Link from "next/link";
 import styles from "./page.module.css";
 import { MenuCategory, MenuItem, MenuSubcategory, INITIAL_MENU_DATA } from "@/lib/menuData";
+import { getMenu } from "@/lib/firestore";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────
 function fmt(p: number) {
@@ -52,11 +52,9 @@ function SubcategoryBlock({ sub, q }: { sub: MenuSubcategory; q: string }) {
 // ─── Category Section ──────────────────────────────────────────────────────
 function CategorySection({
   cat,
-  index,
   q,
 }: {
   cat: MenuCategory;
-  index: number;
   q: string;
 }) {
   const filteredItems = cat.items.filter(
@@ -74,12 +72,11 @@ function CategorySection({
     <section className={styles.categorySection} id={`cat-${cat.id}`}>
       {/* Header */}
       <div className={styles.catHeaderCard}>
-        <div className={styles.catNumBadge}>{index + 1}</div>
+        {cat.icon && <span className={styles.catHeaderIcon}>{cat.icon}</span>}
         <div className={styles.catHeaderText}>
           <h2 className={styles.catNameEn}>{cat.nameEn}</h2>
           <p className={styles.catNameAr}>{cat.nameAr}</p>
         </div>
-        {cat.icon && <span className={styles.catHeaderIcon}>{cat.icon}</span>}
       </div>
 
       {/* Items */}
@@ -93,30 +90,37 @@ function CategorySection({
   );
 }
 
-// ─── Stats ─────────────────────────────────────────────────────────────────
-function computeStats(menu: MenuCategory[]) {
-  let items = 0;
-  let cats = menu.length;
-  menu.forEach((c) => {
-    items += c.items.length;
-    c.subcategories?.forEach((s) => (items += s.items.length));
-  });
-  return { items, cats };
-}
-
 // ─── Main Page ─────────────────────────────────────────────────────────────
 export default function MenuPage() {
-  const menu = INITIAL_MENU_DATA;
-  const { items: totalItems, cats: totalCats } = computeStats(menu);
-  const [activeTab, setActiveTab] = useState(menu[0]?.id || "");
+  // Show static data instantly — no loading screen
+  const [menu, setMenu] = useState<MenuCategory[]>(INITIAL_MENU_DATA);
+  const [activeTab, setActiveTab] = useState(INITIAL_MENU_DATA[0]?.id || "");
   const [searchQ, setSearchQ] = useState("");
-  const navRef = useRef<HTMLDivElement>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  // Scroll active tab button into view
+  // Silently fetch live data from Firestore in background
   useEffect(() => {
-    const btn = navRef.current?.querySelector(`[data-id="${activeTab}"]`) as HTMLElement | null;
-    btn?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
-  }, [activeTab]);
+    getMenu()
+      .then((data) => {
+        if (data && data.length > 0) {
+          setMenu(data);
+          setActiveTab((prev) => prev || (data[0]?.id || ""));
+        }
+      })
+      .catch((err) => console.error("Firestore fetch:", err));
+  }, []);
+
+
+
+  // Track page scroll to style the navbar on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 40);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Highlight tab on scroll
   useEffect(() => {
@@ -142,7 +146,7 @@ export default function MenuPage() {
     setActiveTab(id);
     const el = document.getElementById(`cat-${id}`);
     if (!el) return;
-    const top = el.getBoundingClientRect().top + window.scrollY - 120;
+    const top = el.getBoundingClientRect().top + window.scrollY - 130;
     window.scrollTo({ top, behavior: "smooth" });
   };
 
@@ -161,18 +165,67 @@ export default function MenuPage() {
 
   return (
     <div className={styles.menuPage}>
+      {/* ══ Top Navbar (SaaS Style) ═════════════════════ */}
+      <nav className={`${styles.saasNav} ${scrolled ? styles.scrolled : ""}`} aria-label="Main navigation">
+        <div className={styles.saasNavInner}>
+          {/* Brand */}
+          <div className={styles.saasBrand} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+            <span className={styles.saasBrandName}>Debsy Village</span>
+          </div>
+
+
+
+          {/* Desktop Actions — hidden from public */}
+
+          {/* Mobile Hamburger Button */}
+          <button
+            className={`${styles.hamburger} ${mobileMenuOpen ? styles.hamburgerActive : ""}`}
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileMenuOpen}
+          >
+            <span className={styles.hamburgerLine} />
+            <span className={styles.hamburgerLine} />
+            <span className={styles.hamburgerLine} />
+          </button>
+        </div>
+      </nav>
+
+      {/* Mobile Drawer Overlay */}
+      <div className={`${styles.drawerOverlay} ${mobileMenuOpen ? styles.drawerOpen : ""}`} onClick={() => setMobileMenuOpen(false)}>
+        <div className={styles.drawerContent} onClick={(e) => e.stopPropagation()}>
+          <div className={styles.drawerHeader}>
+            <span className={styles.drawerBrand}>Categories</span>
+            <button className={styles.drawerClose} onClick={() => setMobileMenuOpen(false)}>×</button>
+          </div>
+          <div className={styles.drawerList}>
+            {menu.map((cat) => (
+              <button
+                key={cat.id}
+                className={`${styles.drawerTab} ${activeTab === cat.id ? styles.active : ""}`}
+                onClick={() => {
+                  scrollTo(cat.id);
+                  setMobileMenuOpen(false);
+                }}
+              >
+                {cat.icon && <span className={styles.drawerTabIcon}>{cat.icon}</span>}
+                <div className={styles.drawerTabTextWrap}>
+                  <span className={styles.drawerTabEn}>{cat.nameEn}</span>
+                  {cat.nameAr && <span className={styles.drawerTabAr}>{cat.nameAr}</span>}
+                </div>
+                {activeTab === cat.id && <span className={styles.drawerTabActiveDot} />}
+              </button>
+            ))}
+
+          </div>
+        </div>
+      </div>
+
       {/* ══ Hero ══════════════════════════════ */}
       <header className={styles.hero}>
         <div className={styles.heroGrain} />
         <div className={styles.heroInner}>
-          {/* Cup icon */}
-          <div className={styles.heroCupWrap}>
-            <div className={styles.heroCupRing2} />
-            <div className={styles.heroCupRing} />
-            <div className={styles.heroCup}>☕</div>
-          </div>
-
-          <h1 className={styles.brandName}>Debsy</h1>
+          <h1 className={styles.brandName}>DEBSY</h1>
           <p className={styles.brandSub}>Village</p>
 
           <div className={styles.heroDivider}>
@@ -184,22 +237,6 @@ export default function MenuPage() {
           <div className={styles.heroBadge}>
             <span className={styles.liveDot} />
             Soft Opening Menu
-          </div>
-        </div>
-
-        {/* Stats strip */}
-        <div className={styles.heroStats}>
-          <div className={styles.heroStat}>
-            <div className={styles.heroStatNum}>{totalItems}+</div>
-            <div className={styles.heroStatLabel}>Menu Items</div>
-          </div>
-          <div className={styles.heroStat}>
-            <div className={styles.heroStatNum}>{totalCats}</div>
-            <div className={styles.heroStatLabel}>Categories</div>
-          </div>
-          <div className={styles.heroStat}>
-            <div className={styles.heroStatNum}>2$</div>
-            <div className={styles.heroStatLabel}>Starting From</div>
           </div>
         </div>
       </header>
@@ -218,33 +255,15 @@ export default function MenuPage() {
         </div>
       </div>
 
-      {/* ══ Category Tab Bar ═════════════════════ */}
-      <nav className={styles.categoryNav} aria-label="Menu categories">
-        <div className={styles.navInner} ref={navRef}>
-          {menu.map((cat) => (
-            <button
-              key={cat.id}
-              data-id={cat.id}
-              className={`${styles.categoryTab} ${activeTab === cat.id ? styles.active : ""}`}
-              onClick={() => scrollTo(cat.id)}
-            >
-              {cat.icon && <span className={styles.tabEmoji}>{cat.icon}</span>}
-              {cat.nameEn}
-            </button>
-          ))}
-        </div>
-      </nav>
-
       {/* ══ Content ══════════════════════════════ */}
       <main className={styles.content}>
         {anyResult ? (
-          menu.map((cat, idx) => (
-            <CategorySection key={cat.id} cat={cat} index={idx} q={q} />
+          menu.map((cat) => (
+            <CategorySection key={cat.id} cat={cat} q={q} />
           ))
         ) : (
           <div className={styles.noResults}>
-            <span className={styles.noResultsIcon}>☕</span>
-            <p className={styles.noResultsText}>No items found</p>
+            <p className={styles.noResultsText}>No items found for "{searchQ}"</p>
             <p>Try searching in English or Arabic</p>
           </div>
         )}
@@ -255,20 +274,27 @@ export default function MenuPage() {
         <div className={styles.footerInner}>
           <div className={styles.footerDivider}>
             <div className={styles.footerDividerLine} />
-            <span className={styles.footerLeafIcon}>🌿</span>
+            <div className={styles.footerDividerDot} />
             <div className={styles.footerDividerLine} />
           </div>
-          <p className={styles.footerBrand}>Debsy</p>
+          <p className={styles.footerBrand}>DEBSY</p>
           <p className={styles.footerSub}>Village</p>
-          <span className={styles.footerIG}>📸 @debsy.village</span>
-          <p className={styles.footerCopy}>© 2025 Debsy Village. All rights reserved.</p>
+          <a
+            href="https://instagram.com/debsy_village"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.footerIG}
+          >
+            <svg className={styles.igIcon} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" strokeWidth="1.7" fill="none"/>
+              <circle cx="12" cy="12" r="4.5" stroke="currentColor" strokeWidth="1.7" fill="none"/>
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+            </svg>
+            @debsy_village
+          </a>
+          <p className={styles.footerCopy}>© 2026 Debsy Village. All rights reserved.</p>
         </div>
       </footer>
-
-      {/* ══ Admin FAB ════════════════════════════ */}
-      <Link href="/login" className={styles.adminFab} title="Admin Panel">
-        ⚙️
-      </Link>
     </div>
   );
 }

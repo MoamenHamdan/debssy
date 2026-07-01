@@ -97,6 +97,15 @@ export const getMenu = async (): Promise<MenuCategory[]> => {
 
   return categories;
 };
+function cleanPayload<T extends object>(obj: T): T {
+  const result = { ...obj } as any;
+  Object.keys(result).forEach((key) => {
+    if (result[key] === undefined) {
+      delete result[key];
+    }
+  });
+  return result;
+}
 
 /* ------------------------------------------------------------------ */
 /*  Category CRUD                                                       */
@@ -105,19 +114,31 @@ export const updateCategory = async (
   catId: string,
   data: Partial<Omit<MenuCategory, "items" | "subcategories">>
 ) => {
-  await updateDoc(doc(db, CATEGORIES_COLLECTION, catId), data);
+  await updateDoc(doc(db, CATEGORIES_COLLECTION, catId), cleanPayload(data));
+};
+
+export const addCategory = async (
+  cat: Omit<MenuCategory, "items" | "subcategories">
+) => {
+  await setDoc(doc(db, CATEGORIES_COLLECTION, cat.id), cleanPayload(cat));
+};
+
+export const deleteCategory = async (catId: string) => {
+  await deleteDoc(doc(db, CATEGORIES_COLLECTION, catId));
 };
 
 /* ------------------------------------------------------------------ */
 /*  Item CRUD                                                           */
 /* ------------------------------------------------------------------ */
-export const addMenuItem = async (catId: string, item: Omit<MenuItem, "id">) => {
-  const ref = await addDoc(collection(db, CATEGORIES_COLLECTION, catId, "items"), item);
-  return ref.id;
+export const addMenuItem = async (catId: string, item: MenuItem) => {
+  await setDoc(
+    doc(db, CATEGORIES_COLLECTION, catId, "items", item.id),
+    cleanPayload(item)
+  );
 };
 
 export const updateMenuItem = async (catId: string, itemId: string, data: Partial<MenuItem>) => {
-  await updateDoc(doc(db, CATEGORIES_COLLECTION, catId, "items", itemId), data);
+  await updateDoc(doc(db, CATEGORIES_COLLECTION, catId, "items", itemId), cleanPayload(data));
 };
 
 export const deleteMenuItem = async (catId: string, itemId: string) => {
@@ -130,4 +151,14 @@ export const toggleItemAvailability = async (
   available: boolean
 ) => {
   await updateDoc(doc(db, CATEGORIES_COLLECTION, catId, "items", itemId), { available });
+};
+
+export const moveMenuItem = async (
+  oldCatId: string,
+  newCatId: string,
+  itemId: string,
+  data: MenuItem
+) => {
+  await setDoc(doc(db, CATEGORIES_COLLECTION, newCatId, "items", itemId), cleanPayload(data));
+  await deleteDoc(doc(db, CATEGORIES_COLLECTION, oldCatId, "items", itemId));
 };

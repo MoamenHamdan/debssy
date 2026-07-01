@@ -1,16 +1,18 @@
 import type { Metadata } from "next";
-import { Inter, Outfit } from "next/font/google";
+import { Lato, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
 
-const inter = Inter({
+const lato = Lato({
   variable: "--font-body",
   subsets: ["latin"],
+  weight: ["400", "700", "900"],
 });
 
-const outfit = Outfit({
+const playfair = Playfair_Display({
   variable: "--font-heading",
   subsets: ["latin"],
+  weight: ["400", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -26,7 +28,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${outfit.variable}`}
+      className={`${lato.variable} ${playfair.variable}`}
     >
       <body>
         <AuthProvider>{children}</AuthProvider>

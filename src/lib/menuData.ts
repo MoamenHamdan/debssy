@@ -32,7 +32,6 @@ export const INITIAL_MENU_DATA: MenuCategory[] = [
     id: "village-signature",
     nameEn: "Village Signature",
     nameAr: "توقيع القرية",
-    icon: "⭐",
     sortOrder: 1,
     items: [
       {
@@ -50,7 +49,6 @@ export const INITIAL_MENU_DATA: MenuCategory[] = [
     id: "water",
     nameEn: "Water",
     nameAr: "المياه",
-    icon: "💧",
     sortOrder: 2,
     items: [
       { id: "w-1", nameEn: "Small Water 0.5L", nameAr: "مياه صغيرة 0.5 لن", price: 1.5, available: true },
@@ -62,7 +60,6 @@ export const INITIAL_MENU_DATA: MenuCategory[] = [
     id: "desserts",
     nameEn: "Desserts",
     nameAr: "الحلى",
-    icon: "🍮",
     sortOrder: 3,
     items: [
       {
@@ -98,7 +95,6 @@ export const INITIAL_MENU_DATA: MenuCategory[] = [
     id: "hot-drinks",
     nameEn: "Hot Drinks",
     nameAr: "المشروبات الساخنة",
-    icon: "☕",
     sortOrder: 4,
     items: [
       { id: "hd-1", nameEn: "Turkish Coffee", nameAr: "قهوة تركية", price: 2, available: true },
@@ -124,7 +120,6 @@ export const INITIAL_MENU_DATA: MenuCategory[] = [
     id: "soft-drinks",
     nameEn: "Soft Drinks",
     nameAr: "المشروبات الغازية",
-    icon: "🥤",
     sortOrder: 5,
     items: [
       { id: "sd-1", nameEn: "Ice Tea Mango Tango", nameAr: "آيس تي مانجو تانغو", price: 2.5, available: true },
@@ -140,7 +135,6 @@ export const INITIAL_MENU_DATA: MenuCategory[] = [
     id: "cold-drinks",
     nameEn: "Cold Drinks",
     nameAr: "المشروبات الباردة",
-    icon: "🧊",
     sortOrder: 6,
     subcategories: [
       {
@@ -192,7 +186,6 @@ export const INITIAL_MENU_DATA: MenuCategory[] = [
     id: "appetizers",
     nameEn: "Appetizers",
     nameAr: "المقبلات",
-    icon: "🍟",
     sortOrder: 7,
     items: [
       { id: "ap-1", nameEn: "Small Fries", nameAr: "بطاطس صغيرة", price: 3.5, available: true },
@@ -206,7 +199,6 @@ export const INITIAL_MENU_DATA: MenuCategory[] = [
     id: "sandwiches",
     nameEn: "Sandwiches",
     nameAr: "الساندويشات",
-    icon: "🥪",
     sortOrder: 8,
     items: [
       { id: "sw-1", nameEn: "Fahita", nameAr: "فاهيتا", descriptionEn: "with a side of fries", price: 7, available: true },
@@ -219,7 +211,6 @@ export const INITIAL_MENU_DATA: MenuCategory[] = [
     id: "saj",
     nameEn: "Saj",
     nameAr: "الصاج",
-    icon: "🫓",
     sortOrder: 9,
     items: [
       { id: "sj-1", nameEn: "Zaatar", nameAr: "زعتر", price: 3.33, available: true },
@@ -234,7 +225,6 @@ export const INITIAL_MENU_DATA: MenuCategory[] = [
     id: "hookah",
     nameEn: "Hookah",
     nameAr: "الأراجيل",
-    icon: "🪄",
     sortOrder: 10,
     items: [
       { id: "hk-1", nameEn: "Ajami", nameAr: "عجمي", price: 10, available: true },

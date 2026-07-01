@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>LEVANO | Luminous Noir High Fashion</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400..900;1,400..900&amp;family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Inter:wght@400;500;600&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#1c0300",
+                        "tertiary": "#ffb59e",
+                        "surface-container-high": "#2a2a2c",
+                        "on-primary": "#313031",
+                        "on-tertiary-container": "#dd4200",
+                        "on-secondary-container": "#b4b5b7",
+                        "on-primary-fixed": "#1c1b1c",
+                        "on-error-container": "#ffdad6",
+                        "inverse-on-surface": "#303032",
+                        "on-error": "#690005",
+                        "surface-container": "#1f1f21",
+                        "on-surface-variant": "#c7c6ca",
+                        "surface-variant": "#353437",
+                        "secondary-fixed": "#e2e2e4",
+                        "error": "#ffb4ab",
+                        "on-secondary": "#2f3132",
+                        "secondary-container": "#454749",
+                        "on-secondary-fixed-variant": "#454749",
+                        "tertiary-fixed-dim": "#ffb59e",
+                        "outline": "#919094",
+                        "surface-tint": "#c8c6c7",
+                        "surface-container-lowest": "#0e0e10",
+                        "primary": "#c8c6c7",
+                        "primary-fixed-dim": "#c8c6c7",
+                        "tertiary-fixed": "#ffdbd0",
+                        "primary-container": "#0a0a0b",
+                        "on-tertiary": "#5e1700",
+                        "surface-bright": "#39393b",
+                        "on-tertiary-fixed-variant": "#852400",
+                        "secondary": "#c6c6c8",
+                        "on-primary-fixed-variant": "#474647",
+                        "secondary-fixed-dim": "#c6c6c8",
+                        "background": "#131315",
+                        "on-surface": "#e4e2e4",
+                        "on-background": "#e4e2e4",
+                        "surface-dim": "#131315",
+                        "surface": "#131315",
+                        "on-tertiary-fixed": "#3a0b00",
+                        "outline-variant": "#46464a",
+                        "surface-container-low": "#1b1b1d",
+                        "primary-fixed": "#e5e2e3",
+                        "on-secondary-fixed": "#1a1c1d",
+                        "surface-container-highest": "#353437",
+                        "inverse-surface": "#e4e2e4",
+                        "error-container": "#93000a",
+                        "inverse-primary": "#5f5e5f",
+                        "on-primary-container": "#7a797a",
+                        "accent-saas": "#6366f1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1440px",
+                        "stack-lg": "64px",
+                        "base": "8px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "64px",
+                        "stack-sm": "16px",
+                        "stack-md": "32px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Inter", "sans-serif"],
+                        "headline-lg": ["Bodoni Moda"],
+                        "headline-md": ["Bodoni Moda"],
+                        "body-md": ["Inter", "sans-serif"],
+                        "body-lg": ["Inter", "sans-serif"],
+                        "headline-lg-mobile": ["Bodoni Moda"],
+                        "display-lg": ["Bodoni Moda"],
+                        "button": ["Inter", "sans-serif"],
+                        "nav": ["Inter", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg": ["48px", { "lineHeight": "56px", "fontWeight": "600" }],
+                        "headline-md": ["32px", { "lineHeight": "40px", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "display-lg": ["72px", { "lineHeight": "80px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "button": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            background-color: #131315;
+            color: #e4e2e4;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        .glass-stroke {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hover-lift {
+            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-10px);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+        }
+
+        /* SaaS Nav Styles */
+        .saas-nav-link {
+            transition: all 0.2s ease;
+        }
+
+        .saas-nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: white;
+        }
+    </style>
+</head>
+
+<body class="font-body-md text-body-md selection:bg-accent-saas selection:text-white">
+    <!-- TopNavBar: SaaS Redesign -->
+    <nav
+        class="fixed top-0 w-full z-50 bg-[#1a1a1e]/80 backdrop-blur-xl border-b border-white/5 transition-all duration-300">
+        <div
+            class="flex justify-between items-center px-8 md:px-margin-desktop py-4 w-full max-w-container-max mx-auto">
+            <!-- Brand -->
+            <div class="flex items-center gap-8">
+                <div class="font-display-lg text-2xl tracking-tighter text-white uppercase cursor-pointer">Levano</div>
+                <!-- Desktop Nav Links -->
+                <div class="hidden lg:flex items-center">
+                    <div class="h-6 w-[1px] bg-white/10 mr-8"></div>
+                    <div class="flex items-center gap-1">
+                        <a class="saas-nav-link px-4 py-2 rounded-lg text-[13px] font-medium text-on-surface-variant"
+                            href="#">Collections</a>
+                        <a class="saas-nav-link px-4 py-2 rounded-lg text-[13px] font-medium text-white relative"
+                            href="#">
+                            New Arrivals
+                            <span class="absolute bottom-1 left-4 right-4 h-[2px] bg-accent-saas rounded-full"></span>
+                        </a>
+                        <a class="saas-nav-link px-4 py-2 rounded-lg text-[13px] font-medium text-on-surface-variant"
+                            href="#">Runway</a>
+                        <a class="saas-nav-link px-4 py-2 rounded-lg text-[13px] font-medium text-on-surface-variant"
+                            href="#">Editorial</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Action Items -->
+            <div class="flex items-center gap-3">
+                <button class="saas-nav-link p-2 rounded-lg text-on-surface-variant hover:text-white">
+                    <span class="material-symbols-outlined !text-[20px]">search</span>
+                </button>
+                <button class="saas-nav-link p-2 rounded-lg text-on-surface-variant hover:text-white relative">
+                    <span class="material-symbols-outlined !text-[20px]">shopping_bag</span>
+                    <span
+                        class="absolute top-2 right-2 w-1.5 h-1.5 bg-accent-saas rounded-full border border-[#1a1a1e]"></span>
+                </button>
+                <div class="h-6 w-[1px] bg-white/10 mx-2"></div>
+                <button
+                    class="px-5 py-2 bg-white text-[#1a1a1e] rounded-lg text-[13px] font-semibold hover:bg-white/90 transition-colors">
+                    Sign In
+                </button>
+            </div>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <header class="relative h-screen w-full flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0 scale-105">
+            <img class="w-full h-full object-cover"
+                data-alt="A striking editorial shot of a high-fashion model in a sharp-shouldered black wool suit, standing in a dark, moody studio with soft glowing orange backlighting. The scene is characterized by deep shadows and ethereal light leaks, evoking a luxury film noir atmosphere."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCq5sXOEKWmlNdpdoKBZr98frveyAQkXdVpMjOT1aM0Hi_8R07aHdx0mZ8f3PambK7EyklqvffkajlL1OVpz1EQweV-Nw37Rzwa0Ef8jsyfeswBhR0TTcZ6J2Y3QS8A5WXY8b_ibM4SACTorcJ2gvZZvkEnoIu4vyx5Ih66FVR_cuNXSbZMRu0DsQvg7V73Ef7MEHK9BkHrk1C-v44R8spRvy8OdZ1CQMNiMJcUz0UJN_L3v8KnmyPu_WkGdU5C5cu2on0O9Vv5xpN3" />
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-80"></div>
+        <div class="relative z-10 text-center px-margin-mobile mt-20">
+            <h1
+                class="font-display-lg text-display-lg text-on-surface mb-stack-sm tracking-tighter leading-tight reveal">
+                ETHEREAL<br /><span class="italic font-normal">DIMENSIONS</span>
+            </h1>
+            <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-stack-md reveal delay-200">
+                A study in structured silhouettes and the interplay of shadow. Explore the Autumn/Winter 2024 collection
+                by Levano.
+            </p>
+            <div class="flex gap-gutter justify-center reveal delay-400">
+                <button
+                    class="px-10 py-4 bg-white text-black font-button text-button uppercase tracking-widest hover:brightness-90 transition-all rounded-lg">
+                    Shop Now
+                </button>
+                <button
+                    class="px-10 py-4 glass-stroke backdrop-blur-md text-on-surface font-button text-button uppercase tracking-widest hover:bg-white/10 transition-all rounded-lg">
+                    The Film
+                </button>
+            </div>
+        </div>
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-40">
+            <span class="material-symbols-outlined text-4xl">expand_more</span>
+        </div>
+    </header>
+    <!-- New Arrivals Section (Bento Grid) -->
+    <main class="max-w-container-max mx-auto px-margin-desktop py-stack-lg">
+        <div class="flex justify-between items-end mb-stack-md reveal">
+            <div>
+                <span class="font-label-caps text-label-caps text-accent-saas block mb-2 uppercase">CURATED
+                    SELECTION</span>
+                <h2 class="font-headline-lg text-headline-lg text-on-surface">New Arrivals</h2>
+            </div>
+            <a class="font-button text-button text-on-surface-variant hover:text-white transition-colors flex items-center gap-2 group"
+                href="#">
+                VIEW ALL <span
+                    class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+            </a>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter h-[800px]">
+            <!-- Featured Large Item -->
+            <div class="md:col-span-8 relative group overflow-hidden glass-stroke rounded-xl reveal">
+                <img class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                    data-alt="A close-up high-fashion photograph of a tailored velvet evening coat with intricate silver embroidery."
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAI75EAcOChV5DkjPsoKCF09DH33Q-NxyWgh-x66RZXBtJdIh1DIKmWQncqD9hpxPscrAP2QBUoYo1XoaXrIYJM_PPN7QksI_Dy7CnCgHtGx7fpSSMbNNSP5B16hJSpVXR0J5uWe4UfF-4RrHLMWJp4IVRiA9hCZEwlL7m4byWnEqwX_QZC1hbmr1BbGi7ftU_VX8tRp1Pi3GXa6X_ZsKav7SyOrEHz7kbTbj_nDDyP0KTgkUFJU2eAP4aHZzC8-N2IM8REylCz-ES4" />
+                <div
+                    class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                </div>
+                <div
+                    class="absolute bottom-0 left-0 w-full p-8 translate-y-10 group-hover:translate-y-0 transition-transform duration-500 flex justify-between items-end">
+                    <div>
+                        <h3 class="font-headline-md text-headline-md text-white">Midnight Velvet Overcoat</h3>
+                        <p class="font-body-md text-white/70">Signature Series | $2,450</p>
+                    </div>
+                    <button class="p-4 rounded-xl bg-white text-black hover:scale-110 transition-transform shadow-lg">
+                        <span class="material-symbols-outlined">add_shopping_cart</span>
+                    </button>
+                </div>
+            </div>
+            <!-- Stacked Secondary Items -->
+            <div class="md:col-span-4 flex flex-col gap-gutter">
+                <div class="h-1/2 relative group overflow-hidden glass-stroke rounded-xl reveal delay-200">
+                    <img class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1Y59wKntQI3pzJ8syEDYgHpSNdFzT93qROmzO0GqrfrUXptSQ_vPYbsSmSi3DHvg1LS_7ffTxhMvlUlygnKvNHK7iBDEKIQ5wvvUMHiT9R_-Wo48jRcAGZfveQDWeBo6yxo0TRmcDlHAh4J2v8bex9dVuYfP4i6_aLoVr2iUrKeDomsy-sPVLr5kNbEzI71W0W8ypvdaLaqBnlHhYbt8wxamb-sLrqJfP1-Bqcqk3GcirYdcdPAkihHQE-ikw-CfMfJwlabxNKGT2" />
+                    <div
+                        class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center backdrop-blur-sm">
+                        <div class="text-center">
+                            <h3 class="font-label-caps text-white mb-4">LEATHER</h3>
+                            <button
+                                class="px-6 py-2 border border-white text-white font-button text-xs uppercase tracking-widest rounded-lg hover:bg-white hover:text-black transition-colors">Explore</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="h-1/2 relative group overflow-hidden glass-stroke rounded-xl reveal delay-400">
+                    <img class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAE11moFYiWYGXG5w8hSi6HfIvkTTZ4wKqIlNzPTlqad7XzIeo8_d6k04u2NeoS3e-XaRne9HPUf1zLSTkLBXoQM_ZilHomeDKwK5OtVqKBZq7gPjRsnfh9tkaFXmUt_alrM98omYn0hRBfOwYF5erZkTNVW42ogFt1V0cViPeb_Xfa0k3KzG1an4H6ogmPGS2vVKOFjeAhvzOjB2RudlkbSqbfcFe-RUxCtnyIyFuK5hihJ0lKVHybOxN5hgEzCc6MPbwcACzFNJWA" />
+                    <div
+                        class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center backdrop-blur-sm">
+                        <div class="text-center">
+                            <h3 class="font-label-caps text-white mb-4">ACCESSORIES</h3>
+                            <button
+                                class="px-6 py-2 border border-white text-white font-button text-xs uppercase tracking-widest rounded-lg hover:bg-white hover:text-black transition-colors">Explore</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Animated Separator -->
+    <div class="w-full h-96 relative my-stack-lg overflow-hidden flex items-center justify-center">
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <h2
+                class="font-display-lg text-[120px] md:text-[200px] text-white/5 whitespace-nowrap select-none font-bold italic tracking-tighter">
+                REDEFINING LUXURY REDEFINING LUXURY
+            </h2>
+        </div>
+    </div>
+    <!-- Featured Collections -->
+    <section class="max-w-container-max mx-auto px-margin-desktop py-stack-lg space-y-stack-lg">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-stack-lg items-center">
+            <div class="reveal">
+                <span class="font-label-caps text-accent-saas block mb-4">COLLECTION 01</span>
+                <h2 class="font-headline-lg text-headline-lg text-on-surface mb-stack-sm">Modern Tailoring</h2>
+                <p class="font-body-lg text-body-lg text-on-surface-variant mb-stack-md leading-relaxed">
+                    Our suits are engineered for the contemporary silhouette, blending traditional Savile Row
+                    craftsmanship with industrial-inspired accents by Levano.
+                </p>
+                <div
+                    class="inline-block glass-stroke p-1 rounded-xl px-8 py-3 group cursor-pointer hover:bg-white/5 transition-colors border-white/20">
+                    <span class="font-button text-button text-white group-hover:text-accent-saas transition-colors">THE
+                        SUITS CATALOG</span>
+                </div>
+            </div>
+            <div class="relative aspect-[4/5] rounded-2xl overflow-hidden reveal delay-300 hover-lift">
+                <img class="w-full h-full object-cover"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcWzu5Hyc8SSbaDNHadROil9SaD_HHaihGLxxnV4TnQX1fObO4uAvwa20Wr4jqppMP1TXZM7D9sN76Z37Cz3AvM1mWyrTh1Qc42CgmzbQAKqV1pga1VpvkvneRYnAFuZDGYPM0ZYCDbyJhufYHnbX7pWdlYL0bW_7J-plEHBgy6-MMu_YtE6a4cFvfwvdL9dNXBDruoc_0BozAIlslC2zjIWODyfXST1k7GsXurQT27Vx32NTtx54jKAjqlxN7Rcxi0P6aqXHqBNYN" />
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-stack-lg items-center">
+            <div class="relative aspect-[4/5] rounded-2xl overflow-hidden order-2 md:order-1 reveal hover-lift">
+                <img class="w-full h-full object-cover"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBo494VX0kOjr6nn-xZqJ2MR8Ymr3oEDghQNmv2sMH3biQnOPEWkp3924ed1e7nVVzIpDCjZsgo8BCJOTR66cw8LWnjOM6qB3-YdWgfSNAad02AjRxCX3ZmS7CaC47gZA_5MOsKURGutN-ZS1XNoSs9bUw36tK5BZeE26N8Ge9lz29FR7HN0K7RIGe63WxG3NC4CFS0sSojpPQuRwOIG3wUJmEfJejFd9kKeLGHYoZke7ehEKPdJ0tgCFzM7bqlPxtUTibEMma6fQVP" />
+            </div>
+            <div class="order-1 md:order-2 md:pl-20 reveal delay-300">
+                <span class="font-label-caps text-accent-saas block mb-4">COLLECTION 02</span>
+                <h2 class="font-headline-lg text-headline-lg text-on-surface mb-stack-sm">Avant-Garde Utility</h2>
+                <p class="font-body-lg text-body-lg text-on-surface-variant mb-stack-md leading-relaxed">
+                    Function meets form in our latest line of technical pants and outerwear. Designed for the urban
+                    explorer who refuses to compromise on elegance.
+                </p>
+                <div
+                    class="inline-block glass-stroke p-1 rounded-xl px-8 py-3 group cursor-pointer hover:bg-white/5 transition-colors border-white/20">
+                    <span class="font-button text-button text-white group-hover:text-accent-saas transition-colors">SHOP
+                        UTILITY</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Curated Outfits Section -->
+    <section class="max-w-container-max mx-auto px-margin-desktop py-stack-lg border-t border-white/5">
+        <div class="mb-stack-md reveal">
+            <span class="font-label-caps text-accent-saas block mb-2">COMPLETE LOOKS</span>
+            <h2 class="font-headline-lg text-headline-lg text-on-surface">The Levano Looks</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+            <!-- Outfit Card 1 -->
+            <div class="glass-stroke rounded-xl overflow-hidden reveal group">
+                <div class="aspect-[3/4] overflow-hidden relative">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcWzu5Hyc8SSbaDNHadROil9SaD_HHaihGLxxnV4TnQX1fObO4uAvwa20Wr4jqppMP1TXZM7D9sN76Z37Cz3AvM1mWyrTh1Qc42CgmzbQAKqV1pga1VpvkvneRYnAFuZDGYPM0ZYCDbyJhufYHnbX7pWdlYL0bW_7J-plEHBgy6-MMu_YtE6a4cFvfwvdL9dNXBDruoc_0BozAIlslC2zjIWODyfXST1k7GsXurQT27Vx32NTtx54jKAjqlxN7Rcxi0P6aqXHqBNYN" />
+                    <div
+                        class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                        <button
+                            class="px-8 py-3 bg-white text-black font-button text-button uppercase tracking-widest hover:bg-accent-saas hover:text-white transition-all rounded-lg">Shop
+                            the Look</button>
+                    </div>
+                </div>
+                <div class="p-6 bg-surface-container-low/50">
+                    <h3 class="font-body-lg font-semibold text-white mb-3">Midnight Architecture</h3>
+                    <ul class="text-on-surface-variant text-sm space-y-1">
+                        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-accent-saas rounded-full"></span>
+                            Asymmetric Wool Blazer</li>
+                        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-accent-saas rounded-full"></span>
+                            High-Rise Silk Trousers</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Outfit Card 2 -->
+            <div class="glass-stroke rounded-xl overflow-hidden reveal delay-200 group">
+                <div class="aspect-[3/4] overflow-hidden relative">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBo494VX0kOjr6nn-xZqJ2MR8Ymr3oEDghQNmv2sMH3biQnOPEWkp3924ed1e7nVVzIpDCjZsgo8BCJOTR66cw8LWnjOM6qB3-YdWgfSNAad02AjRxCX3ZmS7CaC47gZA_5MOsKURGutN-ZS1XNoSs9bUw36tK5BZeE26N8Ge9lz29FR7HN0K7RIGe63WxG3NC4CFS0sSojpPQuRwOIG3wUJmEfJejFd9kKeLGHYoZke7ehEKPdJ0tgCFzM7bqlPxtUTibEMma6fQVP" />
+                    <div
+                        class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                        <button
+                            class="px-8 py-3 bg-white text-black font-button text-button uppercase tracking-widest hover:bg-accent-saas hover:text-white transition-all rounded-lg">Shop
+                            the Look</button>
+                    </div>
+                </div>
+                <div class="p-6 bg-surface-container-low/50">
+                    <h3 class="font-body-lg font-semibold text-white mb-3">Technical Ease</h3>
+                    <ul class="text-on-surface-variant text-sm space-y-1">
+                        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-accent-saas rounded-full"></span>
+                            Textured Mohair Knit</li>
+                        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-accent-saas rounded-full"></span>
+                            Articulated Cargo Pants</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Outfit Card 3 -->
+            <div class="glass-stroke rounded-xl overflow-hidden reveal delay-400 group">
+                <div class="aspect-[3/4] overflow-hidden relative">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCq5sXOEKWmlNdpdoKBZr98frveyAQkXdVpMjOT1aM0Hi_8R07aHdx0mZ8f3PambK7EyklqvffkajlL1OVpz1EQweV-Nw37Rzwa0Ef8jsyfeswBhR0TTcZ6J2Y3QS8A5WXY8b_ibM4SACTorcJ2gvZZvkEnoIu4vyx5Ih66FVR_cuNXSbZMRu0DsQvg7V73Ef7MEHK9BkHrk1C-v44R8spRvy8OdZ1CQMNiMJcUz0UJN_L3v8KnmyPu_WkGdU5C5cu2on0O9Vv5xpN3" />
+                    <div
+                        class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                        <button
+                            class="px-8 py-3 bg-white text-black font-button text-button uppercase tracking-widest hover:bg-accent-saas hover:text-white transition-all rounded-lg">Shop
+                            the Look</button>
+                    </div>
+                </div>
+                <div class="p-6 bg-surface-container-low/50">
+                    <h3 class="font-body-lg font-semibold text-white mb-3">Noir Vanguard</h3>
+                    <ul class="text-on-surface-variant text-sm space-y-1">
+                        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-accent-saas rounded-full"></span>
+                            Sculpted Evening Coat</li>
+                        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-accent-saas rounded-full"></span>
+                            Shadow-Work Vest</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Editorial Feed -->
+    <section class="bg-surface-container-lowest py-stack-lg">
+        <div class="max-w-container-max mx-auto px-margin-desktop">
+            <div class="mb-stack-md reveal">
+                <h2 class="font-headline-lg text-headline-lg text-on-surface">The Runway Journal</h2>
+                <p class="text-on-surface-variant font-body-md">Inside the world of Levano High Fashion.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+                <article class="glass-stroke rounded-xl overflow-hidden reveal group border-white/5">
+                    <div class="h-64 overflow-hidden">
+                        <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoFcvrU5GBgi7OHJg4vuZ29zf_4dTiXMxbAMgbI3e8QjDXMkwLF0GPmFyZ297o7E9bESu-MUPpbIo_lj7dMSPCdhtvjZe7q73uhaGhb2uB4O1QMDJcDd7nvCncbfZZGmXDNdp3Nu4t5XT4GmPopkKEQD-Q6YZM51PWSZ_B7oFZEBBZ8AApVGYKeMZtNTA_FTIpWFYcojGBo7dRLnqlNXDXLDJ_X-QaQAjgTagllPfp7NF651vgBXW5MShwj62z_Y2D2vHwKXm281Px" />
+                    </div>
+                    <div class="p-6">
+                        <span
+                            class="text-accent-saas font-label-caps text-[10px] tracking-widest uppercase">Editorial</span>
+                        <h3 class="font-body-lg font-semibold text-white my-2">The Paris After-Dark Collection</h3>
+                        <p class="text-on-surface-variant text-sm line-clamp-2">A deep dive into the inspirations behind
+                            our latest showcase by Levano.</p>
+                    </div>
+                </article>
+                <article class="glass-stroke rounded-xl overflow-hidden reveal delay-200 group border-white/5">
+                    <div class="h-64 overflow-hidden">
+                        <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGuwvNIwSWK09_uRRihFawqcWsN9K5g_4VC9iijYZFCa0jDgJw6BaYw7IDnLm7E8jWV37NxHxd6GeSw6Gt6vbHpyCD6LKMUbMiG99DnO9uQfyFihE2SD0Zqul2rQ4jUrMYhtjoUZwp8oWhrXpBLfQVCsMUIo1SNqezqplIH0Z1QxWKczFNfOgxPB5CgEK-M8HA4KUvfsl6XNgLeacXPeptq8cxzEC_ZRC0NLeZMsnEQ3GHfe0NtVaSY6-lhUC_Lw_MJ9lbMgfTI24P" />
+                    </div>
+                    <div class="p-6">
+                        <span
+                            class="text-accent-saas font-label-caps text-[10px] tracking-widest uppercase">Process</span>
+                        <h3 class="font-body-lg font-semibold text-white my-2">Sourcing the Obsidian Silk</h3>
+                        <p class="text-on-surface-variant text-sm line-clamp-2">Exploring the sustainable mills in
+                            northern Italy that create our signature fabrics.</p>
+                    </div>
+                </article>
+                <article class="glass-stroke rounded-xl overflow-hidden reveal delay-400 group border-white/5">
+                    <div class="h-64 overflow-hidden">
+                        <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIKf8iAQ9UdarvY4kSBJDjSbhF_JVOPd_PcXBqpgLVnaj5nJ2G9QAlfxOfLLqKaTnWYip9KpUvlyV029ca0czxNZhDYxbddAC1MT0kIh_kmQJnmb13RSQdnrhbYhX3Rf3vjTcHQ9kLsLwl_4FrmzBuaXkYDbz97B0nWj0lftcdW-u2mwC9mxd0rUZcNKIBfXxwGBUWMNCQWoBw8IDoTdFoSfzpFtWLEtMupldKh3yD8fi-SUM4UqZMxFkh5Yx1LJU1Ot0FNlo5f5Be" />
+                    </div>
+                    <div class="p-6">
+                        <span
+                            class="text-accent-saas font-label-caps text-[10px] tracking-widest uppercase">Spaces</span>
+                        <h3 class="font-body-lg font-semibold text-white my-2">Tokyo Flagship Opening</h3>
+                        <p class="text-on-surface-variant text-sm line-clamp-2">The Omotesando district welcomes Levano
+                            into a new sanctuary.</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="w-full relative bg-[#0e0e11] border-t border-white/5">
+        <div
+            class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-desktop py-stack-lg w-full max-w-container-max mx-auto">
+            <div class="md:col-span-2">
+                <div class="font-display-lg text-4xl text-white mb-6 uppercase tracking-tighter">Levano</div>
+                <p class="text-on-surface-variant max-w-sm mb-8 font-body-md">
+                    Crafting ethereal silhouettes for the modern vanguard. Join our inner circle for exclusive access to
+                    runway drops.
+                </p>
+                <div class="flex gap-4">
+                    <input
+                        class="bg-white/5 border border-white/10 rounded-lg focus:border-accent-saas transition-colors p-3 px-4 text-sm outline-none w-64 uppercase tracking-widest text-on-surface"
+                        placeholder="JOIN THE LIST" type="email" />
+                    <button
+                        class="bg-white text-black p-3 rounded-lg hover:bg-accent-saas hover:text-white transition-all">
+                        <span class="material-symbols-outlined block">north_east</span>
+                    </button>
+                </div>
+            </div>
+            <div class="flex flex-col gap-4">
+                <span
+                    class="font-label-caps text-[11px] text-white/40 mb-2 uppercase tracking-widest">COLLECTIONS</span>
+                <a class="text-on-surface-variant hover:text-white transition-colors text-sm" href="#">Autumn/Winter
+                    24</a>
+                <a class="text-on-surface-variant hover:text-white transition-colors text-sm" href="#">Spring/Summer
+                    24</a>
+                <a class="text-on-surface-variant hover:text-white transition-colors text-sm" href="#">Essentials</a>
+            </div>
+            <div class="flex flex-col gap-4">
+                <span
+                    class="font-label-caps text-[11px] text-white/40 mb-2 uppercase tracking-widest">INFORMATION</span>
+                <a class="text-on-surface-variant hover:text-white transition-colors text-sm"
+                    href="#">Sustainability</a>
+                <a class="text-on-surface-variant hover:text-white transition-colors text-sm" href="#">Privacy
+                    Policy</a>
+                <a class="text-on-surface-variant hover:text-white transition-colors text-sm" href="#">Terms</a>
+            </div>
+        </div>
+        <div
+            class="max-w-container-max mx-auto px-margin-desktop py-8 border-t border-white/5 text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-white/20 text-[10px] uppercase tracking-[0.3em]">© 2024 Levano High Fashion. All rights
+                reserved.</p>
+            <div class="flex gap-6">
+                <a class="text-white/20 hover:text-accent-saas transition-colors text-[10px] uppercase tracking-widest"
+                    href="#">Instagram</a>
+                <a class="text-white/20 hover:text-accent-saas transition-colors text-[10px] uppercase tracking-widest"
+                    href="#">Twitter</a>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Reveal animation on scroll
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+
+        window.addEventListener("scroll", reveal);
+        reveal();
+
+        // Parallax and Header scroll effect
+        window.addEventListener("scroll", function () {
+            const scrolled = window.pageYOffset;
+            const heroImage = document.querySelector('header img');
+            if (heroImage) {
+                heroImage.parentElement.style.transform = `translateY(${scrolled * 0.3}px) scale(${1 + scrolled * 0.0005})`;
+            }
+
+            const nav = document.querySelector('nav');
+            if (scrolled > 50) {
+                nav.classList.add('py-2');
+                nav.classList.remove('py-4');
+            } else {
+                nav.classList.add('py-4');
+                nav.classList.remove('py-2');
+            }
+        });
+    </script>
+</body>
+
+</html>
